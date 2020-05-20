@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
     private MapView mapView;
     private boolean mapsSupported = true;
     private boolean hotspotPlotted = false;
-    private boolean firstTimeZoom = true;
+    private FusedLocationProviderClient fusedLocationClient;
 
     private static final LatLng SINGAPORE = new LatLng(1.3458, 103.7959);
     CameraPosition initView = new CameraPosition.Builder().target(SINGAPORE).zoom(12).build();
@@ -47,6 +49,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getContext());
     }
 
     @Override
@@ -85,6 +88,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final FrameLayout parent = (FrameLayout) inflater.inflate(R.layout.fragment_gmap, container, false);
         mapView = (MapView) parent.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
         return parent;
     }
@@ -115,19 +119,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         zoomMapToLocation(loc,15);
     }
 
-    private void zoomMapToLocation(double lat, double lon, int zoom) { map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat,lon), zoom));}
-
     private void zoomMapToLocation(LatLng latLng, int zoom) { map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));}
-
-    // Get last known location
-    private void getLastKnownLocation() {
-
-    }
-
-    private void enableUserLocationSettings() {
-        map.setMyLocationEnabled(true);
-        map.getUiSettings().setMyLocationButtonEnabled(true);
-    }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -148,20 +140,23 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
             hotspotPlotted = true;
         }
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            enableUserLocationSettings();
-            LocationManager mLocationManager = (LocationManager) this.getContext().getSystemService(LOCATION_SERVICE);
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1,1, this);
+            map.setMyLocationEnabled(true);
+            map.getUiSettings().setMyLocationButtonEnabled(true);
+            fusedLocationClient.getLastLocation().addOnSuccessListener(this.getActivity(), new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+                        zoomMapToLocation(loc,17);
+                    }
+                }
+            });
         }
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        if(firstTimeZoom) {
-            LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-            zoomMapToLocation(loc,17);
-            firstTimeZoom = false;
-        }
-    }
+    public void onLocationChanged(Location location) { }
 
     @Override
     public void onProviderDisabled(String var1) {
