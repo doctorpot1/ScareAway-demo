@@ -34,10 +34,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.navigation_upload:
                 case R.id.navigation_check_in:
+                    hotFenceManager.DestroyAllGeofence();
                     SafeEntryFragment uploadFragment = new SafeEntryFragment();
                     transaction.replace(R.id.fragmentContainer, uploadFragment);
                     break;
                 case R.id.navigation_help:
+                    hotFenceManager.DestroyAllGeofence();
                     TraceFragment traceFragment = new TraceFragment();
                     transaction.replace(R.id.fragmentContainer, traceFragment);
                     break;

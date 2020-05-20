@@ -48,7 +48,6 @@ public class HotFenceManager {
                                 fencedHotSpots.add(fencingHotSpots.get(i));
                             }
                             fencingHotSpots = new ArrayList<>();
-                            DestroyAllGeofence();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
