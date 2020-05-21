@@ -2,7 +2,10 @@ package com.example.boon.scareaway;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +13,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -20,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
     private GeofencingClient geofencingClient;
     private HotFenceManager hotFenceManager;
     private PendingIntent geofencePendingIntent;
+    public static final String ACTION_ALERT = "alert";
+    BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            createPopupAlert(intent.getExtras().getString(ACTION_ALERT));
+        }
+    };
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -63,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GMapFragment.MY_PERMISSIONS_REQUEST_LOCATION);
         }
+        LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter(ACTION_ALERT));
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -84,5 +101,10 @@ public class MainActivity extends AppCompatActivity {
         // calling addGeofences() and removeGeofences().
         geofencePendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         return geofencePendingIntent;
+    }
+
+    private void createPopupAlert(String msg) {
+        Alert alert = Alert.newInstance(msg);
+        alert.show(getSupportFragmentManager(),"alert");
     }
 }

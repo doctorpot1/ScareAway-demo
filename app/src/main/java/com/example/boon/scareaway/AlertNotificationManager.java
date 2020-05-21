@@ -4,13 +4,13 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,9 +34,11 @@ public class AlertNotificationManager {
     }
 
     public void createAlert(String title) {
-        Log.e("Geofence enter", title);
         Toast.makeText(context,title,Toast.LENGTH_LONG).show();
         sendNotification(title);
+        Intent i = new Intent(MainActivity.ACTION_ALERT);
+        i.putExtra(MainActivity.ACTION_ALERT, title);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(i);
     }
 
     private void sendNotification(String msg) {
