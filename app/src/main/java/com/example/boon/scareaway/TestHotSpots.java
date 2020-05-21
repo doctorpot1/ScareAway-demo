@@ -1,9 +1,12 @@
 package com.example.boon.scareaway;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 public class TestHotSpots {
     private ArrayList<HotSpot> hotSpots;
+    private ArrayList<LatLng> polyLine;
 
     public TestHotSpots() {
         hotSpots = new ArrayList<>();
@@ -41,10 +44,26 @@ public class TestHotSpots {
         hotSpots.add(new HotSpot(1.4609, 103.8245, 80, "Alaunia Lodge\n(Very High Risk)", "249 cases", "r"));
         hotSpots.add(new HotSpot(1.4517, 103.7930, 30, "182 Woodlands Industrial Park E5\n(High Risk)", "65 cases", "o"));
         hotSpots.add(new HotSpot(1.4510, 103.7927, 30, "212 Woodlands Industrial Park E5\n(High Risk)", "26 cases", "o"));
+        //add demo polyline
+        polyLine = new ArrayList<>();
+        polyLine.add(new LatLng(1.4289, 103.8354));
+        polyLine.add(new LatLng(1.4248, 103.8352));
+        polyLine.add(new LatLng(1.4246, 103.8368));
+        polyLine.add(new LatLng(1.4244, 103.8368));
+        polyLine.add(new LatLng(1.4243, 103.8376));
+        polyLine.add(new LatLng(1.4247, 103.8380));
     }
 
     public ArrayList<HotSpot> getHotSpots() {
         return hotSpots;
+    }
+
+    public ArrayList<LatLng> getPolyLine() {
+        return polyLine;
+    }
+
+    public void setPolyLine(ArrayList<LatLng> polyLine) {
+        this.polyLine = polyLine;
     }
 
     public void setHotSpots(ArrayList<HotSpot> hotSpots) {

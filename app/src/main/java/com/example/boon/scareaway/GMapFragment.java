@@ -27,6 +27,8 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
@@ -117,6 +119,10 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
         zoomMapToLocation(loc,15);
     }
 
+    private void addPolyline(ArrayList<LatLng> latLngArrayList) {
+        Polyline line = map.addPolyline(new PolylineOptions().addAll(latLngArrayList).width(15).color(Color.RED));
+    }
+
     private void zoomMapToLocation(LatLng latLng, int zoom) { map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));}
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -135,6 +141,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
                 HotSpot spot = hotSpots.get(i);
                 addHotspot(spot.getLat(),spot.getLon(),spot.getTitle(),spot.getSnippet(),spot.getRad(),spot.getColor());
             }
+            addPolyline(initList.getPolyLine());
             hotspotPlotted = true;
         }
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
