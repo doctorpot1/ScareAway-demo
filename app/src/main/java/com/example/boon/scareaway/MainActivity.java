@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private GeofencingClient geofencingClient;
     private HotFenceManager hotFenceManager;
     private PendingIntent geofencePendingIntent;
+    private boolean plotLine = false; //demo code
     public static final String ACTION_ALERT = "alert";
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -44,14 +45,18 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     GMapFragment gMapFragment = new GMapFragment();
+                    if(plotLine) gMapFragment.setPolyPlot(true);
                     transaction.replace(R.id.fragmentContainer, gMapFragment);
                     break;
                 case R.id.navigation_upload:
                 case R.id.navigation_check_in:
+                    plotLine = true;
                     SafeEntryFragment uploadFragment = new SafeEntryFragment();
                     transaction.replace(R.id.fragmentContainer, uploadFragment);
                     break;
                 case R.id.navigation_help:
+                    plotLine = true;
+                    hotFenceManager.DestroyAllGeofence();
                     TraceFragment traceFragment = new TraceFragment();
                     transaction.replace(R.id.fragmentContainer, traceFragment);
                     break;

@@ -38,12 +38,17 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
     private MapView mapView;
     private boolean mapsSupported = true;
     private boolean hotspotPlotted = false;
+    private boolean polyPlot = false;
     private FusedLocationProviderClient fusedLocationClient;
 
     private static final LatLng SINGAPORE = new LatLng(1.3458, 103.7959);
     CameraPosition initView = new CameraPosition.Builder().target(SINGAPORE).zoom(12).build();
     public GMapFragment() {
         // Required empty public constructor
+    }
+
+    public void setPolyPlot(boolean polyPlot) {
+        this.polyPlot = polyPlot;
     }
 
     @Override
@@ -141,7 +146,7 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback, Google
                 HotSpot spot = hotSpots.get(i);
                 addHotspot(spot.getLat(),spot.getLon(),spot.getTitle(),spot.getSnippet(),spot.getRad(),spot.getColor());
             }
-            addPolyline(initList.getPolyLine());
+            if(polyPlot) addPolyline(initList.getPolyLine());
             hotspotPlotted = true;
         }
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
