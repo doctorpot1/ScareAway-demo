@@ -23,7 +23,7 @@ public class HotFenceManager {
     private ArrayList<HotSpot> fencingHotSpots = new ArrayList<>();
     private ArrayList<HotSpot> fencedHotSpots = new ArrayList<>();
     private ArrayList<Geofence> geofences = new ArrayList<>();
-    static private int LOITERING_DURATION_MS = 300000;
+    static private int LOITERING_DURATION_MS = 60000;
 
     public HotFenceManager(GeofencingClient geofencingClient, PendingIntent geofencePendingIntent) {
         this.geofencingClient = geofencingClient;
