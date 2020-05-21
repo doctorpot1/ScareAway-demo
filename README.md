@@ -1,8 +1,11 @@
 This idea might be useful to help get less people infected with dengue, or fall victim to crime, if we put the hotspots as dengue cluster or crime cluster instead. Would be a good visualisation tool too.
 
+## Super Quick Summary
+Think of it as being the WeChat for covid-19. One app that does it all!
+
 ## Why is this important
 The current TraceTogether app already have good traction and it helps to reduce the cost of contact tracing. Thus, working on top of it and make it better and more widely adopted would be a cost effective move, since every new adoption increase the effectiveness of the app exponentially. 
-Think of it as we currently have a narrative where TraceTogether is the main app that promotes the "strength in unity". On top of that have we have ScareAway that promotes the "keep yourself safe" narrative, and have TraceTogether's main feature as the Trojan Horse into the users phone. Same with having other features with the narrative of "convenience", and have TraceTogether's main feature as the Trojan Horse into the users phone.
+TraceTogether is the main app and that promotes the "strength in unity" narrative. On top of that have we have ScareAway that promotes the "keep yourself safe" narrative. If people download TraceTogether because of the ScareAway features that what we achieve is to have TraceTogether as the Trojan Horse into the users phone. The same concept applies to the other "convenience" narrative 
 
 ## Inspiration
 As all human have self-preservative instinct, we should leverage on that to our advantage to:
