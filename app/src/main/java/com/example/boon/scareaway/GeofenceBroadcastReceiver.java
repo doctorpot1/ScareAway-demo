@@ -14,10 +14,8 @@ import com.google.android.gms.location.GeofencingEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.constraint.Constraints.TAG;
-
 public class GeofenceBroadcastReceiver extends BroadcastReceiver {
-
+    private AlertNotificationManager notificationManager;
     public void onReceive(Context context, Intent intent) {
         Log.e("Geofence onReceive","Geofenced!!!");
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
@@ -34,21 +32,16 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         // Get the transition details as a String.
         String geofenceTransitionDetails = getGeofenceTrasitionDetails(geofenceTransition, triggeringGeofences);
 
+        if(notificationManager != null) notificationManager.setContextAndIntent(context,intent);
+        else notificationManager = new AlertNotificationManager(context,intent);
         // Test that the reported transition was of interest.
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
-            // Send notification and log the transition details.
-//            sendNotification(geofenceTransitionDetails);
-            Log.e("Geofence enter", geofenceTransitionDetails);
-            Toast.makeText(context,geofenceTransitionDetails,Toast.LENGTH_LONG).show();
+            notificationManager.createAlert(geofenceTransitionDetails);
         } else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
-            // Send notification and log the transition details.
-//            sendNotification(geofenceTransitionDetails);
-            Log.e("Geofence dwell", geofenceTransitionDetails);
-            Toast.makeText(context,geofenceTransitionDetails,Toast.LENGTH_LONG).show();
+            notificationManager.createAlert(geofenceTransitionDetails);
         } else {
             // GEOFENCE_TRANSITION_EXIT
             Log.e("Geofence exit", geofenceTransitionDetails);
-            Toast.makeText(context,geofenceTransitionDetails,Toast.LENGTH_LONG).show();
         }
     }
 

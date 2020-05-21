@@ -12,8 +12,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
-import java.util.Timer;
-
+/*
+* Manager to manage geofences, in this demo, it doesn't really handle much but with the 100 geofence limit we should rotate the geofences to only have those near the user
+* as well as handling in the background
+* */
 public class HotFenceManager {
     private GeofencingClient geofencingClient;
     private PendingIntent geofencePendingIntent;
