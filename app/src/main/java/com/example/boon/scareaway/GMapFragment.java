@@ -31,8 +31,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 
-import static android.content.Context.LOCATION_SERVICE;
-
 public class GMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener, LocationListener {
     private GoogleMap map;
     private MapView mapView;
