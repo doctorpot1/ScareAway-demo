@@ -1,11 +1,11 @@
 This idea might be useful to help get less people infected with dengue, or fall victim to crime, if we put the hotspots as dengue cluster or crime cluster instead. Would be a good visualisation tool too.
 
 ## Super Quick Summary
-Think of it as being the WeChat for covid-19. One app that does it all!
+Think of it as being the WeChat/Grab for covid-19. One app that does it all!
 
 ## Why is this important
-The current TraceTogether app already have good traction and it helps to reduce the cost of contact tracing. Thus, working on top of it and make it better and more widely adopted would be a cost effective move, since every new adoption increase the effectiveness of the app exponentially. 
-TraceTogether is the main app and that promotes the "strength in unity" narrative. On top of that have we have ScareAway that promotes the "keep yourself safe" narrative. If people download TraceTogether because of the ScareAway features that what we achieve is to have TraceTogether as the Trojan Horse into the users phone. The same concept applies to the other "convenience" narrative 
+The current TraceTogether app already have good traction and it helps to reduce the cost of contact tracing. Thus, working on top of it and making it better and more widely adopted would be a cost effective move, since every new adoption increase the effectiveness of the app exponentially. 
+TraceTogether is the main app and it promotes the "strength in unity" narrative. On top of that I would add ScareAway that promotes the "keep yourself safe" narrative. If people download TraceTogether just because of the ScareAway features, TraceTogether will become like a "Trojan Horse" that find its way into the users phone. The same concept applies to other narratives such as "super convenience".
 
 ## Inspiration
 As all human have self-preservative instinct, we should leverage on that to our advantage to:
@@ -18,7 +18,7 @@ As all human will tend to go for convenience, we should leverage on that to our 
 1. get more people to download and use the app;
 
 ## Features to leverage on self-preservative instinct
-Quick summary: Adding hotspot and geofencing features to TraceTogether app so that people can have the choice to decide if they really wanna hang out or go to that hotspot. This add an additional narrative to speak to a majority of the people whom are scare and do not want to contract the virus, to download the app, so that they can avoid high risk area. This also reduce the crowd in a high risk area, thus reducing the probability of contracting the virus.
+Quick summary: Adding hotspot and geofencing features to TraceTogether app so that people can have the choice to decide if they really wanna hang out or go to that hotspot. This add an additional narrative to speak to a majority of people whom are scared and do not want to contract the virus. They will be inclined to download the app, so that they can avoid high risk area. This also reduce the crowd in a high risk area, thus reducing the probability of contracting the virus.
 
 **Details**
 - Hotspot of all the current known cases and cluster with level of severity:
@@ -27,6 +27,11 @@ Quick summary: Adding hotspot and geofencing features to TraceTogether app so th
         - after 14 days and no new cases link to that spot will be orange
         - after 28 days and no new cases link to that spot will be yellow
         - after 42 days and no new cases link to that spot will be cleared
+    - Heatmap sizing
+        - size to cover the entire building
+        - >10 new cases link to that spot will have the size increase by 10%
+        - >50 new cases link to that spot will have the size increase by 20%
+        - >100 new cases link to that spot will have the size increase by 30%
     - Option to let people turn on and off location service so they will have a dot on the map to more easily identify if they are close
     - So people whom have no real need to be there, will not stay or go to that places, and risk getting the virus from people whom are there frequently
 - Geofencing of all know cases and cluster and notify the user when they are entering a hotspot:
@@ -48,8 +53,8 @@ Quick summary: Look at current services that those people whom did not install t
 - Integrating features such as MaskGoWhere or whatever covid-19 related services to increase the stickiness of the app.
 
 ## How to test if it works
-- Survey with current user on the ScareAway narrative, benefits & feature and check on the acceptance rate, the rate where they will share and the rate that they will install for their immediate contact.
-- A/B testing of promotional material one talking about the TraceTogether feature, one about ScareAway narrative, benefits & feature and check the conversion rate.
+- Survey with current user on the ScareAway's narrative, benefits & feature and check on the acceptance rate, the rate where they will share and the rate that they will install for their immediate contact.
+- A/B testing of promotional material one talking about the TraceTogether feature, one about ScareAway feature and check the conversion rate.
 - Run a POC and place marketing material to promote one-click SafeEntry at a mall with a QR-code to download the app (embedded with a tracking id so you know user download the app as they saw the marketing material). Of course it will end up saying it is a market test, and ask them to click subscribe to get notified when the app is ready. check the scan rate and subscribe rate to determine if it is worth the effort to go ahead.
 
 ## Potential challenges
