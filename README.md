@@ -3,6 +3,8 @@ This idea might be useful to help get less people infected with dengue, or fall 
 ## Super Quick Summary
 Think of it as being the WeChat/Grab for covid-19. One app that does it all!
 
+[PowerPoint slide here](https://github.com/doctorpot1/ScareAway-demo/blob/master/COVID-19%20Idea%20Sprint.pptx "Slides")
+
 ## Why is this important
 The current TraceTogether app already have good traction and it helps to reduce the cost of contact tracing. Thus, working on top of it and making it better and more widely adopted would be a cost effective move, since every new adoption increase the effectiveness of the app exponentially. 
 TraceTogether is the main app and it promotes the "strength in unity" narrative. On top of that I would add ScareAway that promotes the "keep yourself safe" narrative. If people download TraceTogether just because of the ScareAway features, TraceTogether will become like a "Trojan Horse" that find its way into the users phone. The same concept applies to other narratives such as "super convenience".
